@@ -1,0 +1,121 @@
+// ---------------------------------- //
+//             Typography             //
+// ---------------------------------- //
+
+h1, h2, h3, h4 {
+    font-weight: 500;
+    font-family: 'Catamaran', sans-serif;
+    color: $c-txt-default;
+}
+
+h1, .h1 {
+    @include rem-typo(48px);
+}
+
+h2, .h2 {
+    @include rem-typo(32px);
+    @include respond-to(mobile) {
+        @include rem-typo(26px);
+    }
+}
+
+h3, .h3 {
+    @include rem-typo(22px);
+    @include respond-to(mobile) {
+        @include rem-typo(20px);
+    }
+}
+
+h4, .h4 {
+    @include rem-typo(16px);
+}
+
+h5, .h5 {
+    @include rem-typo(13px);
+}
+
+h6, .h6 {
+    @include rem-typo(11px);
+}
+
+body {
+    font-family: 'Catamaran', sans-serif;
+}
+
+p, li, button {
+    color: $c-txt-default;
+    @include rem-typo(16px);
+    font-family: 'Catamaran', sans-serif;
+}
+
+input {
+    font-family: 'Catamaran', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: $c-txt-links;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+p {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.dashed-left {
+    @include rem-typo(24px);
+    padding-left: 40px;
+    position: relative;
+    &:before {
+        content: '';
+        height: 3px;
+        left: 0;
+        width: 25px;
+        background-color: $c-bleu-foncee;
+        @include absolute-vertical-center;
+    }
+}
+
+.dashed-title {
+    padding: 0 70px;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    @include rem-typo(40px, 45px);
+    margin-bottom: 20px;
+    @include respond-to(mobile) {
+        @include rem-typo(32px, 35px);
+        padding: 0 50px;
+    }
+    &:before {
+        content: '';
+        height: 3px;
+        left: 0;
+        width: 50px;
+        background-color: $c-bleu-foncee;
+        @include absolute-vertical-center;
+        @include respond-to(mobile) {
+            width: 35px;
+        }
+    }
+    &:after {
+        content: '';
+        height: 3px;
+        right: 0;
+        width: 50px;
+        background-color: $c-bleu-foncee;
+        @include absolute-vertical-center;
+        @include respond-to(mobile) {
+            width: 35px;
+        }
+    }
+    &.is-white {
+        color: #ffffff;
+        &:before, &:after {
+            background-color: #ffffff;
+        }
+    }
+}

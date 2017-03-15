@@ -1,0 +1,200 @@
+// ------------------------------ //
+//             Mixins             //
+// ------------------------------ //
+
+@mixin absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+}
+
+@mixin absolute-vertical-center {
+    position: absolute;
+    top: 50%;
+    @include transform(translateY(-50%));
+}
+
+@mixin absolute-horizontal-center {
+    position: absolute;
+    left: 50%;
+    @include transform(translateX(-50%));
+}
+
+// reset-list-style
+@mixin reset-list-style {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    list-style-type: none;
+    li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+    }
+}
+
+// Clearfix
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+        line-height: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// Visuallyhidden
+@mixin visuallyhidden($hide: true) {
+    @if $hide == true {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+    } @else {
+        overflow: visible;
+        clip: auto;
+        width: auto;
+        height: auto;
+        margin: 0;
+    }
+}
+
+// Calculate REM
+@function rem($size) {
+    $values: ();
+    @if type-of($size) == list {
+        @each $current in $size {
+            $values: append($values, remove-px($current) / 16 * 1rem);
+        }
+    } @else {
+        $values: remove-px($size) / 16 * 1rem;
+    }
+    @return $values;
+}
+
+// Remove-px
+@function remove-px($target) {
+    @if not unitless($target) {
+        @return $target / 1px ;
+    } @else {
+        @return $target;
+    }
+}
+
+// REM font-size
+@mixin rem-fontsize($size) {
+    font-size: remove-px($size) + px;
+    font-size: rem($size);
+}
+
+// REM line-height
+@mixin rem-lineheight($size) {
+    line-height: remove-px($size) + px;
+    line-height: rem($size);
+}
+
+// REM font-size and line-height
+@mixin rem-typo($font, $line: 1.4) {
+    font-size: remove-px($font) + px;
+    font-size: rem($font);
+    @if ($line == 1.4) {
+        line-height: $line;
+    } @else {
+        line-height: remove-px($line) + px;
+        line-height: rem($line);
+    }
+}
+
+
+// Emify
+@function emify($target, $base: 16) {
+    $values: ();
+    $baseFixed: remove-px($base);
+    @if type-of($target) == list {
+        // $values will return element with type list
+        @each $t in $target {
+            $tFixed: remove-px($t);
+            $values: append($values, if(type-of($tFixed) == number, ($tFixed / $baseFixed) + em, $tFixed));
+        }
+    } @else {
+        // $values will return element with type number
+        $values: (remove-px($target) / $baseFixed) + em;
+    }
+    @return $values;
+}
+
+// Respond-to
+@mixin respond-to($breakpoint) {
+    $bp-value: map-get($mq-breakpoints, $breakpoint);
+    @if $bp-value == null {
+        @if type-of($breakpoint) == list {
+            @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+                @content;
+            }
+        }
+        @else if $breakpoint == "retina" {
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                @content;
+            }
+        }
+        @else {
+            @media (max-width: $breakpoint) {
+                @content;
+            }
+        }
+    }
+    @else {
+        $bp-min: nth(nth($bp-value, 1), 2);
+        $bp-max: nth(nth($bp-value, 2), 2);
+        @if $bp-min == false and $bp-max != false {
+            @media (max-width: $bp-max) {
+                @content;
+            }
+        }
+        @else if $bp-min != false and $bp-max == false {
+            @media (min-width: $bp-min) {
+                @content;
+            }
+        } @else {
+            @media (min-width: $bp-min) and (max-width: $bp-max) {
+                @content;
+            }
+        }
+    }
+}
+
+// Transform
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    -o-transform: $transforms;
+    transform: $transforms;
+}
+
+@function strip-units($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+@mixin animation($animation...) {
+  -o-animation: $animation;
+  -moz-animation: $animation;
+  -webkit-animation: $animation;
+  animation: $animation;
+}
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}

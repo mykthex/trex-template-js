@@ -1,0 +1,69 @@
+// ------------------------------ //
+//             Layout             //
+// ------------------------------ //
+
+:first-child {
+    margin-top: 0;
+}
+
+:last-child {
+    margin-bottom: 0;
+}
+
+.l-page-wrapper {
+    position: relative;
+    width: $document-width;
+    margin: 0 auto;
+    padding: 0 $spacing-default;
+    font-size: 0;
+    @include respond-to($document-width) {
+        width: auto;
+    }
+    @include respond-to(tablet) {
+        width: auto;
+        padding: 0 $spacing-tablet;
+    }
+    @include respond-to(mobile) {
+        width: auto;
+        padding: 0 $spacing-mobile;
+    }
+    .is-zoomed & {
+        width: auto;
+        margin: 0 $spacing-default;
+    }
+}
+
+.l-content-section {
+    position: relative;
+}
+
+.l-fullwidth {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    @include transform(translateX(-50%));
+    .ie8 & {
+        left: auto;
+        width: auto;
+        padding: 0;
+        @include transform(translateX(0));
+    }
+}
+
+.l-block-content,
+.l-block-sidebar {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.is-two-columns .l-block-content {
+    width: calc(100% - #{$sidebar-width + $sidebar-margin});
+}
+
+.is-two-columns .l-block-sidebar {
+    width: $sidebar-width + $sidebar-margin;
+    padding-left: $sidebar-margin;
+}
