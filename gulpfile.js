@@ -11,10 +11,41 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 
+var svgSprite = require('gulp-svg-sprite');
+var cheerio = require('gulp-cheerio');
+
 var sass_config = {
     indentWidth: 4,
-    outputStyle: 'compressed' ,
+    outputStyle: 'compressed',
 };
+
+var cheerioConfig = {
+    run: function($) {
+        $('[fill]').removeAttr('fill');
+    },
+    parserOptions: {
+        xmlMode: true
+    }
+};
+
+var svgSpriteConfig = {
+    mode: {
+        symbol: {
+            dest: 'svg',
+            sprite: 'symbols.svg'
+        }
+    },
+    svg: {
+        dimensionAttributes: false
+    }
+};
+
+gulp.task('svgSprite', function() {
+    return gulp.src('svg/*.svg')
+        .pipe(cheerio(cheerioConfig))
+        .pipe(svgSprite(svgSpriteConfig))
+        .pipe(gulp.dest('dist/'));
+});
 
 gulp.task('browser-sync', function() {
     browserSync({
@@ -38,8 +69,8 @@ gulp.task('twig', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('styles',  function() {
-    return gulp.src( 'sass/*.scss')
+gulp.task('styles', function() {
+    return gulp.src('sass/*.scss')
         .pipe(cssGlobbing({
             extensions: ['.css', '.scss'],
             scssImportPath: {
@@ -52,29 +83,39 @@ gulp.task('styles',  function() {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest( 'dist/css/'));
+        .pipe(gulp.dest('dist/css/'));
 });
 
 gulp.task('compress', function() {
-  return gulp.src('js/functions.js')
-    .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('dist/js/'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js/'));
+    return gulp.src('js/functions.js')
+        .pipe(concat('scripts.js'))
+        .pipe(gulp.dest('dist/js/'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('copyJS', function() {
-  return gulp.src('js/**/*.js')
-    .pipe(gulp.dest('dist/js/'));
+    return gulp.src('js/**/*.js')
+        .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('copyIMG', function() {
-  return gulp.src('img/**/')
-    .pipe(gulp.dest('dist/img/'));
+    return gulp.src('img/**/')
+        .pipe(gulp.dest('dist/img/'));
+});
+
+gulp.task('copySVG', function() {
+    return gulp.src('svg/**/')
+        .pipe(gulp.dest('dist/svg/originals/'));
+});
+
+gulp.task('copyFonts', function() {
+  return gulp.src('fonts/**/')
+    .pipe(gulp.dest('dist/fonts/'));
 });
 
 // Default gulp taskgulp
-gulp.task('default', ['styles', 'compress', 'twig', 'copyJS', 'copyIMG', 'watch']);
+gulp.task('default', ['styles', 'compress', 'twig', 'copyJS', 'copyIMG', 'copySVG', 'svgSprite', 'copyFonts', 'watch']);
 
 
 gulp.task('watch', ['browser-sync'], function() {
@@ -85,21 +126,27 @@ gulp.task('watch', ['browser-sync'], function() {
         });
     });
     watch('sass/**/*.scss', function() {
-         runSequence('styles', function() {
+        runSequence('styles', function() {
             browserSync.reload();
             gutil.log(gutil.colors.green('Done T-rex STYLES!'));
         });
     });
-    watch('js/*.js', function() {
-         runSequence('compress', 'copyJS', function() {
+    watch('js/**/*.js', function() {
+        runSequence('compress', 'copyJS', function() {
             browserSync.reload();
             gutil.log(gutil.colors.green('Done T-rex JS!'));
         });
     });
     watch('img/**/', function() {
-         runSequence('copyIMG', function() {
+        runSequence('copyIMG', function() {
             browserSync.reload();
             gutil.log(gutil.colors.green('Done T-rex IMG!'));
+        });
+    });
+    watch('svg/**/', function() {
+        runSequence('svgSprite', 'copySVG', function() {
+            browserSync.reload();
+            gutil.log(gutil.colors.green('Done T-rex SVG!'));
         });
     });
 });
