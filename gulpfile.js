@@ -99,6 +99,11 @@ gulp.task('copyJS', function() {
         .pipe(gulp.dest('dist/js/'));
 });
 
+gulp.task('copyJSON', function() {
+    return gulp.src('json/**/')
+        .pipe(gulp.dest('dist/json/'));
+});
+
 gulp.task('copyIMG', function() {
     return gulp.src('img/**/')
         .pipe(gulp.dest('dist/img/'));
@@ -115,7 +120,7 @@ gulp.task('copyFonts', function() {
 });
 
 // Default gulp taskgulp
-gulp.task('default', ['styles', 'compress', 'twig', 'copyJS', 'copyIMG', 'copySVG', 'svgSprite', 'copyFonts', 'watch']);
+gulp.task('default', ['styles', 'compress', 'twig', 'copyJS', 'copyJSON', 'copyIMG', 'copySVG', 'svgSprite', 'copyFonts', 'watch']);
 
 
 gulp.task('watch', ['browser-sync'], function() {
@@ -135,6 +140,12 @@ gulp.task('watch', ['browser-sync'], function() {
         runSequence('compress', 'copyJS', function() {
             browserSync.reload();
             gutil.log(gutil.colors.green('Done T-rex JS!'));
+        });
+    });
+    watch('json/**/*.json', function() {
+        runSequence('compress', 'copyJSON', function() {
+            browserSync.reload();
+            gutil.log(gutil.colors.green('Done T-rex JSON!'));
         });
     });
     watch('img/**/', function() {
