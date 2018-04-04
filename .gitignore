@@ -34,3 +34,7 @@ log/
 *.sqlite
 node_modules/
 .ftpquota
+
+# Projet stuff #
+package-lock.json
+dist/
