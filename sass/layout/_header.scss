@@ -1,0 +1,12 @@
+.main-header {
+  align-items: center;
+  display: flex;
+
+  h1 {
+    color: #fffff;
+  }
+
+  input[type='checkbox']:first-of-type {
+    margin-left: 20px;
+  }
+}
