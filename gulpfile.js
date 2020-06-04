@@ -7,7 +7,7 @@ var twig = require('gulp-twig');
 var cssGlobbing = require('gulp-css-globbing');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync');
-var runSequence = require('run-sequence');
+var runSequence = require('gulp4-run-sequence');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 
@@ -45,16 +45,6 @@ gulp.task('svgSprite', function() {
         .pipe(cheerio(cheerioConfig))
         .pipe(svgSprite(svgSpriteConfig))
         .pipe(gulp.dest('dist/'));
-});
-
-gulp.task('browser-sync', function() {
-    browserSync({
-        server: {
-            baseDir: 'dist'
-        },
-        ghostMode: false,
-        open: false
-    });
 });
 
 gulp.task('twig', function() {
@@ -119,7 +109,14 @@ gulp.task('copyFonts', function() {
     .pipe(gulp.dest('dist/fonts/'));
 });
 
-gulp.task('watch', gulp.series('browser-sync', function() {
+gulp.task('watch', gulp.series(function() {
+    browserSync({
+        server: {
+            baseDir: 'dist'
+        },
+        ghostMode: false,
+        open: false
+    });
     watch('twig/**/*.twig', function() {
         runSequence('twig', function() {
             browserSync.reload();
