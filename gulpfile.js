@@ -119,11 +119,7 @@ gulp.task('copyFonts', function() {
     .pipe(gulp.dest('dist/fonts/'));
 });
 
-// Default gulp taskgulp
-gulp.task('default', ['styles', 'compress', 'twig', 'copyJS', 'copyJSON', 'copyIMG', 'copySVG', 'svgSprite', 'copyFonts', 'watch']);
-
-
-gulp.task('watch', ['browser-sync'], function() {
+gulp.task('watch', gulp.series('browser-sync', function() {
     watch('twig/**/*.twig', function() {
         runSequence('twig', function() {
             browserSync.reload();
@@ -160,4 +156,8 @@ gulp.task('watch', ['browser-sync'], function() {
             gutil.log(gutil.colors.green('Done T-rex SVG!'));
         });
     });
-});
+}));
+
+
+// Default gulp taskgulp
+gulp.task('default', gulp.series('styles', 'compress', 'twig', 'copyJS', 'copyJSON', 'copyIMG', 'copySVG', 'svgSprite', 'copyFonts', 'watch'));
