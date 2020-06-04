@@ -1,0 +1,17 @@
+:root {
+  --theme-card-bg-hue: #FF8800;
+  --theme-card-title-hue: #880088;
+  --theme-card-text-hue: #000088;
+}
+
+.card {
+  background-color: hsl(var(--theme-card-bg-hue), 60%, 50%);
+
+  .title {
+    color : hsl(var(--theme-card-title-hue), 75%, 20%);
+  }
+
+  .text {
+    color : hsl(var(--theme-card-text-hue), 75%, 20%);
+  }
+}
