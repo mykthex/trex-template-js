@@ -1,12 +1,55 @@
 .main-header {
   align-items: center;
   display: flex;
+  justify-content: space-between;
 
   h1 {
     color: #fffff;
   }
 
-  input[type='checkbox']:first-of-type {
-    margin-left: 20px;
+  .switcher {
+    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
+
+    .switcher {
+      appearance: none;
+      background-color: #888888;
+      border-radius: 12.5px;
+      cursor: pointer;
+      height: 25px;
+      outline: none;
+      position: relative;
+      transition: all .2s ease-in-out;
+      width: 70px;
+    }
+
+    .switcher:checked {
+      background: #ffffff;
+    }
+
+    .switcher:after{
+      background-color: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 .25em rgba(0,0,0,.3);
+      content: "";
+      height: 25px;
+      left: 0;
+      position: absolute;
+      transform: scale(.7);
+      transition: all .2s ease-in-out;
+      width: 25px;
+    }
+
+    .switcher:checked:after {
+      background-color: #888888;
+      left: calc(100% - 25px);
+    }
+
+    .switcher-label {
+      color: #ffffff;
+      font-weight: 700;
+      @include rem-typo(22);
+    }
   }
 }
