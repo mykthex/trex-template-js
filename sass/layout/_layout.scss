@@ -2,12 +2,12 @@
 //             Layout             //
 // ------------------------------ //
 
-:first-child {
-    margin-top: 0;
+body {
+    background: #203155;
 }
 
-:last-child {
-    margin-bottom: 0;
+h1 {
+    color: #fff;
 }
 
 .l-page-wrapper {

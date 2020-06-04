@@ -1,6 +1,26 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card {
-  background: white;
-  box-shadow: 0 0 10px #000;
+  background: #f7f7f7;
   padding: 15px;
   margin: 15px;
+  flex-basis: calc(25% - 30px);
+  flex-grow: 0;
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .tag {
+    background: #fff;
+    border-radius: 5px;
+    padding: 3px 5px 1px;
+    display: inline-block;
+    margin-bottom: 15px;
+    @include rem-typo(16);
+  }
 }
