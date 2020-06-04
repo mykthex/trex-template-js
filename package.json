@@ -25,10 +25,10 @@
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.1",
+    "gulp4-run-sequence": "^1.0.1",
     "install": "^0.13.0",
     "node-notifier": "^7.0.1",
     "npm": "^6.14.5",
-    "run-sequence": "^2.2.1",
     "yargs": "^15.3.1"
   },
   "dependencies": {
