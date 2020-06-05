@@ -70,7 +70,7 @@ gulp.task('styles', function() {
         }))
         .pipe(sass(sass_config))
         .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
+            Browserslist: ['last 2 versions'],
             cascade: false
         }))
         .pipe(gulp.dest('dist/css/'));
@@ -80,7 +80,7 @@ gulp.task('compress', function() {
     return gulp.src('js/functions.js')
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js/'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('dist/js/'));
 });
 

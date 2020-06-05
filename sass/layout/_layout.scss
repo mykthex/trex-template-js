@@ -3,7 +3,7 @@
 // ------------------------------ //
 
 body {
-    background: #203155;
+    background: var(--body-bg-color,#203155);
 }
 
 h1 {
