@@ -4,10 +4,10 @@
   justify-content: space-between;
 
   h1 {
-    color: #fffff;
+    color: var(--main-title-color, #ffffff);
   }
 
-  .switcher {
+  .switcher-wrapper {
     align-items: center;
     display: flex;
     flex-direction: column-reverse;

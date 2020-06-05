@@ -5,7 +5,7 @@
 }
 
 .card {
-  background: #f7f7f7;
+  background-color: var(--main-bg-color, #f7f7f7);
   border-radius: 6px;
   padding: 15px;
   margin: 15px;
@@ -13,17 +13,22 @@
   flex-grow: 0;
 
   .title {
+    color: var(--card-title-color, #222222);
     margin-top: 0;
     margin-bottom: 5px;
   }
 
   .tag {
-    color: #fff;
-    background: #666;
+    color: var(--card-tag-color, #ffffff);
+    background: var(--card-tag-bg-color, #666666);
     border-radius: 5px;
     padding: 3px 5px 1px;
     display: inline-block;
     margin-bottom: 15px;
     @include rem-typo(16);
+  }
+
+  p {
+    color: var(--card-text-color, #222222);
   }
 }
