@@ -3,7 +3,8 @@
 // ------------------------------ //
 
 body {
-    background: var(--body-bg-color,#203155);
+    background: var(--body-bg, linear-gradient(0deg, rgba(32,46,50,1) 0%, rgba(46,73,102,1) 78%));
+    min-height: 100vh;
 }
 
 h1 {

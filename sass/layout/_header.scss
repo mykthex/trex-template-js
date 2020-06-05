@@ -28,7 +28,7 @@
       background: #ffffff;
     }
 
-    .switcher:after{
+    .switcher:after {
       background-color: #ffffff;
       border-radius: 50%;
       box-shadow: 0 0 .25em rgba(0,0,0,.3);
@@ -50,6 +50,10 @@
       color: #ffffff;
       font-weight: 700;
       @include rem-typo(22);
+    }
+
+    .switcher:checked ~ .switcher-label {
+      color: #222222;
     }
   }
 }

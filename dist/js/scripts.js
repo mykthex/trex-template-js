@@ -1,17 +1,17 @@
 const switcher = document.querySelector(".switcher");
 
 const dayMode = {
-  '--body-bg-color': '#d8d8d8',
+  '--body-bg': 'linear-gradient(0deg, rgba(239,255,247,1) 0%, rgba(158,236,255,1) 78%)',
   '--main-title-color': '#222222',
-  '--card-bg-color': '#333333',
+  '--card-bg-color': '#54839c',
   '--card-title-color': '#f8f8f8',
-  '--card-tag-color': '#444444',
-  '--card-tag-bg-color': '#dddddd',
+  '--card-tag-color': '#4a4a4a',
+  '--card-tag-bg-color': '#8dbd00',
   '--card-text-color': '#f8f8f8',
 }
 
 const reset = {
-  '--body-bg-color': '',
+  '--body-bg': '',
   '--main-title-color': '',
   '--card-bg-color': '',
   '--card-title-color': '',
