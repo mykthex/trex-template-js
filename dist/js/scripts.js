@@ -1,3 +1,4 @@
+const body = document.body;
 const switcher = document.querySelector(".switcher");
 
 const dayMode = {
@@ -20,20 +21,28 @@ const reset = {
   '--card-text-color': '',
 }
 
-switcher.addEventListener('change', handleTheme);
+body.addEventListener('mousemove', e => {
+  let x = e.clientX;
+  let y = e.clientY;
 
-function handleTheme(e) {
+  body.style.setProperty('--mouse-x', (x / body.clientWidth));
+  body.style.setProperty('--mouse-y', (y / body.clientHeight));
+});
+
+
+
+switcher.addEventListener('change', e => {
   if(e.target.checked) {
     switchThemeTo('day-mode');
   } else {
     switchThemeTo('reset');
   }
-}
+});
 
 function applyTheme(objTheme) {
   const keys = Object.keys(objTheme);
   for (const key of keys) {
-    document.body.style.setProperty(key, objTheme[key]);
+    body.style.setProperty(key, objTheme[key]);
     console.log(key, objTheme[key]);
   }
 }
