@@ -45,7 +45,6 @@ function applyTheme(objTheme) {
   const keys = Object.keys(objTheme);
   for (const key of keys) {
     body.style.setProperty(key, objTheme[key]);
-    console.log(key, objTheme[key]);
   }
 }
 
