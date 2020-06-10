@@ -14,6 +14,10 @@
   flex-grow: 0;
   filter: brightness(calc(1 - (var(--mouse-x) - 0.5)/3 + (var(--mouse-y) - 0.5)/3 ));
 
+  &:hover {
+    box-shadow:inset 0px 0px 0px 3px var(--card-hover-border-color, #90a8b4);
+  }
+
   .title {
     color: var(--card-title-color, #222222);
     margin-top: 0;
