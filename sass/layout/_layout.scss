@@ -2,6 +2,16 @@
 //             Layout             //
 // ------------------------------ //
 
+:root {
+  --main-bg-color: coral;
+  --card-bg-color: #ffffff;
+  --card-title-color: #666666;
+  --card-tag-color: #ffffff;
+  --card-tag-bg-color: #666666;
+  --card-text-color: #666666;
+  --card-hover-border-color: #90a8b4;
+}
+
 body {
     background: var(--body-bg, linear-gradient(0deg, rgba(32,46,50,1) 0%, rgba(46,73,102,1) 78%));
     min-height: 100vh;

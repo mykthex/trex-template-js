@@ -6,7 +6,7 @@
 }
 
 .card {
-  background-color: var(--card-bg-color, #e0e0e0);
+  background-color: var(--card-bg-color);
   border-radius: 6px;
   padding: 15px;
   margin: 15px;
@@ -14,19 +14,28 @@
   flex-grow: 0;
   filter: brightness(calc(1 - (var(--mouse-x) - 0.5)/3 + (var(--mouse-y) - 0.5)/3 ));
 
+  &.is-news {
+    --card-bg-color: #323233;
+    --card-title-color: #ffffff;
+    --card-tag-color: #323233;
+    --card-tag-bg-color: #ffffff;
+    --card-text-color: #ffffff;
+    --card-hover-border-color: #90a8b4;
+  }
+
   &:hover {
-    box-shadow:inset 0px 0px 0px 3px var(--card-hover-border-color, #90a8b4);
+    box-shadow:inset 0px 0px 0px 3px var(--card-hover-border-color);
   }
 
   .title {
-    color: var(--card-title-color, #222222);
+    color: var(--card-title-color);
     margin-top: 0;
     margin-bottom: 5px;
   }
 
   .tag {
-    color: var(--card-tag-color, #ffffff);
-    background: var(--card-tag-bg-color, #666666);
+    color: var(--card-tag-color);
+    background: var(--card-tag-bg-color);
     border-radius: 5px;
     padding: 3px 5px 1px;
     display: inline-block;
@@ -35,6 +44,6 @@
   }
 
   p {
-    color: var(--card-text-color, #222222);
+    color: var(--card-text-color);
   }
 }
